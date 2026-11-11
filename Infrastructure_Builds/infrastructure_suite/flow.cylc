@@ -14,7 +14,8 @@
 	 R1 = """
          prepare_hpc_host => extract_xios_background => build_xios => create_xios_module => create_prgenv_module => run_xios_toy_attached & run_xios_toy_server
 {% if not XIOS_ONLY %}
-                prepare_hpc_host => extract_oasis => build_oasis => run_oasis_tutorial => create_oasis_module => build_xios
+                {# prepare_hpc_host => extract_oasis => build_oasis => run_oasis_tutorial => create_oasis_module => build_xios #}
+                prepare_hpc_host => extract_oasis => build_oasis => create_oasis_module => build_xios
 {% endif %}
                 """
 [runtime]

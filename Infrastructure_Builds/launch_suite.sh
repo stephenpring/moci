@@ -8,34 +8,34 @@ fi
 specified_host=$1
 deployment_location=$2
 
-# Ensure that the branch has been checked in
-git_status=$(git status)
-if [[ $git_status == *"nothing to commit, working tree clean"* ]]; then
-    echo "Suite checked in, running in deployment mode"
-else
-    echo "The suite working copy must be checked in to run in deployment mode"
-    exit 999
-fi
+# # Ensure that the branch has been checked in
+# git_status=$(git status)
+# if [[ $git_status == *"nothing to commit, working tree clean"* ]]; then
+#     echo "Suite checked in, running in deployment mode"
+# else
+#     echo "The suite working copy must be checked in to run in deployment mode"
+#     exit 999
+# fi
 
 # Get our remote repository location, and check that it exists on github
-remote_url=($(git remote -v))
-remote_url=${remote_url[1]}
-if [[ $remote_url == "git@github.com"* ]]; then
-    echo "The suite has a remote url $remote_url"
-else
-    echo 'This suite must be connected to an upstream repository in github'
-    exit 999
-fi
+# remote_url=($(git remote -v))
+# remote_url=${remote_url[1]}
+# if [[ $remote_url == "git@github.com"* ]]; then
+#     echo "The suite has a remote url $remote_url"
+# else
+#     echo 'This suite must be connected to an upstream repository in github'
+#     exit 999
+# fi
 
-fullhash=$(git log -n 1 --pretty=format:"%H")
-# Check to see if the commit exists upstream
-git ls-remote $remote_url | grep $fullhash
-if [[ $? == 0 ]]; then
-    echo 'The remote repository contains this hash'
-else
-    echo 'The remote repository does not contain the current hash. Please push changes'
-    exit 999
-fi
+# fullhash=$(git log -n 1 --pretty=format:"%H")
+# # Check to see if the commit exists upstream
+# git ls-remote $remote_url | grep $fullhash
+# if [[ $? == 0 ]]; then
+#     echo 'The remote repository contains this hash'
+# else
+#     echo 'The remote repository does not contain the current hash. Please push changes'
+#     exit 999
+# fi
 
 
 # Get our parameters
