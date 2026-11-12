@@ -1,12 +1,19 @@
 #!/usr/bin/env bash
 
-if [ $# -ne 2 ]; then
-    echo 'This script takes two arguments, the deployment host, and the deployment path for the modules'
-    exit 999;
+# if [ $# -ne 2 ]; then
+#     echo 'This script takes two arguments, the deployment host, and the deployment path for the modules'
+#     exit 999;
+# fi
+
+if [[ $# -lt 2 || $# -gt 3 ]]; then
+    echo "Usage: $0 <deployment-host> <deployment-path> [workflow-name]"
+    exit 2
 fi
 
 specified_host=$1
 deployment_location=$2
+requested_run_name=${3:-}
+
 
 # # Ensure that the branch has been checked in
 # git_status=$(git status)
@@ -81,9 +88,9 @@ if [ $xios_only != "true" ]; then
 fi
 
 current_directory=$(basename "$PWD")
-run_name="${current_directory}_deploy_${specified_host}"
+default_run_name="${current_directory}_deploy_${specified_host}"
+run_name=${requested_run_name:-$default_run_name}
 echo "Running launch suite as $run_name. Deploying modules to $specified_host"
-
 
 echo $remote_url
 echo $suite_revision
