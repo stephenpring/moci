@@ -12,7 +12,7 @@
 [scheduling] 
     [[graph]]
 	 R1 = """
-         prepare_hpc_host => extract_xios_background => build_xios => create_xios_module => create_prgenv_module => run_xios_toy_attached & run_xios_toy_server
+         prepare_hpc_host => extract_xios_background => build_xios => create_xios_module => create_prgenv_module
 {% if not XIOS_ONLY %}
                 {# prepare_hpc_host => extract_oasis => build_oasis => run_oasis_tutorial => create_oasis_module => build_xios #}
                 prepare_hpc_host => extract_oasis => build_oasis => create_oasis_module => build_xios
@@ -30,6 +30,7 @@
             --qos=normal
     [[LOCALHOST]]
         platform=localhost
+        [[[environment]]]
     [[HPC]]
 	env-script = "{{MODULE_CMD}}"
 	platform = {{HPC_HOST}}
@@ -120,6 +121,7 @@
         [[[environment]]]
             ROSE_TASK_APP=extract_xios
             XIOS_VERSION={{XIOS_VERSION}}
+            LOCAL_XIOS_SOURCE={{LOCAL_XIOS_SOURCE}}
 	    XIOS_REV={{XIOS_REV}}
 	    XIOS_URL={{XIOS_URL}}
     [[build_xios]]

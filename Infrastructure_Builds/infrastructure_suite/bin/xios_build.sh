@@ -72,7 +72,7 @@ cat << EOF > arch-EX_UKMO.fcm
 %FCOMPILER      ftn
 %LINKER         CC
 
-%BASE_CFLAGS     -std=c++03 -DMPICH_SKIP_MPICXX 
+%BASE_CFLAGS     -std=c++11 -DMPICH_SKIP_MPICXX 
 
 ## Otherwise take your pick of these, refer to information above.
 %PROD_CFLAGS    -O1 -DBOOST_DISABLE_ASSERTS 
